@@ -5,12 +5,7 @@ import parseToRgb from './parseToRgb'
 import curry from '../internalHelpers/_curry'
 
 /**
- * Mixes two colors together by calculating the average of each of the RGB components.
- *
- * By default the weight is 0.5 meaning that half of the first color and half the second
- * color should be used. Optionally the weight can be modified by providing a number
- * as the first argument. 0.25 means that a quarter of the first color and three quarters
- * of the second color should be used.
+ * Mixes two provided colors together by calculating the average of each of the RGB components weighted towards the first color by the provided weight.
  *
  * @example
  * // Styles as object usage
@@ -48,7 +43,7 @@ function mix(weight?: number = 0.5, color: string, otherColor: string): string {
     alpha: typeof parsedColor2.alpha === 'number' ? parsedColor2.alpha : 1,
   }
 
-  // The formular is copied from the original Sass implementation:
+  // The formula is copied from the original Sass implementation:
   // http://sass-lang.com/documentation/Sass/Script/Functions.html#mix-instance_method
   const alphaDelta = color1.alpha - color2.alpha
   const x = parseFloat(weight) * 2 - 1
